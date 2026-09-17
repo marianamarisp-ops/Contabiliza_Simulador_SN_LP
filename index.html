@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulador Simples Nacional x Lucro Presumido | Contabiliza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="logo-contabiliza.svg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="authGate" class="auth-gate">
+  <div class="product-page">
+    <section class="product-card" aria-labelledby="productTitle">
+      <img class="product-shot" alt="Contabiliza Simulador Simples Nacional x Lucro Presumido" src="contabiliza-simulador-sn-lp-produto.png">
+      <div class="product-info">
+        <span class="product-tag">SIMULADOR TRIBUTÁRIO · SIMPLES NACIONAL X LUCRO PRESUMIDO</span>
+        <h1 id="productTitle">Compare <span class="hl">Simples Nacional</span> e Lucro Presumido</h1>
+        <p class="product-lead">Compare Guia única, híbrido (por fora) e Lucro Presumido na transição da Reforma (2027–2033). Números claros e relatório pronto para o cliente.</p>
+
+        <div class="product-hooks" aria-label="Destaques do produto">
+          <div class="product-hook">
+            <span class="product-hook-k">Para quem</span>
+            <span class="product-hook-v">Contadores e consultores com clientes no Simples Nacional</span>
+          </div>
+          <div class="product-hook">
+            <span class="product-hook-k">Resultado</span>
+            <span class="product-hook-v">Três caminhos lado a lado + trajetória até 2033</span>
+          </div>
+          <div class="product-hook">
+            <span class="product-hook-k">Entrega</span>
+            <span class="product-hook-v">Relatório com a marca do seu escritório em PDF</span>
+          </div>
+        </div>
+
+        <h2 class="product-sub">Por que adquirir agora</h2>
+        <ul class="product-benefits">
+          <li><b>Antecipe a conversa:</b> mostre se vale permanecer no DAS, pagar IBS/CBS por fora ou migrar ao Lucro Presumido.</li>
+          <li><b>Projeção até 2033:</b> acompanhe a transição ano a ano com gráfico, tabela e recomendação.</li>
+          <li><b>Relatório com a sua marca:</b> personalize o escritório e entregue PDF pelo navegador, sem planilha improvisada.</li>
+          <li><b>Vários clientes no mesmo acesso:</b> salve cenários, troque de empresa e reabra simulações quando precisar.</li>
+        </ul>
+
+        <h2 class="product-sub">O que você consegue fazer</h2>
+        <ul class="product-features">
+          <li>Simular anexos e segregações no estilo PGDAS-D</li>
+          <li>Comparar Guia única × Híbrido × Lucro Presumido</li>
+          <li>Incluir benefícios IBS/CBS e créditos de compras</li>
+          <li>Salvar vários clientes e gerar relatório em PDF</li>
+        </ul>
+
+        <div class="product-cta-block">
+          <div class="product-cta-row">
+            <a class="btn btn-lr btn-big product-buy" href="https://pay.cakto.com.br/PLACEHOLDER" target="_blank" rel="noopener noreferrer">Adquirir</a>
+            <button id="authGoLogin" class="btn btn-primary btn-big product-login" type="button">Login</button>
+          </div>
+          <p class="product-secure">Pagamento seguro pela Cakto. A chave de ativação chega no e-mail da compra. No primeiro login você cadastra uma senha; depois entra só com e-mail e senha.</p>
+          <p class="product-note">Ferramenta de simulação e apoio à decisão. Não substitui a apuração fiscal (PGDAS-D, DAS, ECF ou escriturações).</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="product-access" aria-hidden="true">
+      <div id="authLoginCard" class="auth-card">
+        <img class="auth-logo" alt="Contabiliza" src="logo-contabiliza.svg">
+        <h1 id="authTitle">Acesso ao simulador</h1>
+        <p id="authLead" class="auth-lead">Já comprou? Entre com o <b>mesmo e-mail da compra na Cakto</b> e a <b>chave de ativação</b> enviada após o pagamento. No primeiro acesso você cadastra sua senha.</p>
+        <form id="authForm" class="auth-form" autocomplete="on">
+          <label for="authEmail">E-mail</label>
+          <input id="authEmail" name="email" type="email" required placeholder="voce@empresa.com" autocomplete="username">
+          <div id="authKeyBlock">
+            <label for="authKey" id="authKeyLabel">Chave de ativação</label>
+            <div class="auth-key-wrap">
+              <input id="authKey" name="accessKey" type="password" required placeholder="CONT-XXXX-XXXX-XXXX" autocomplete="current-password" spellcheck="false">
+              <button id="authKeyToggle" class="auth-key-toggle" type="button" aria-label="Mostrar chave de ativação" aria-pressed="false">Mostrar</button>
+            </div>
+            <p id="authKeyHint" class="auth-field-hint">Use a chave recebida por e-mail. Depois do primeiro login, ela é substituída pela senha que você cadastrar.</p>
+          </div>
+          <div id="authError" class="auth-error" hidden></div>
+          <button id="authSubmit" class="btn btn-primary auth-submit" type="submit">Entrar</button>
+          <button id="authForgotOpen" class="btn btn-ghost auth-link-btn" type="button" hidden>Esqueci minha senha</button>
+          <button id="authSwitchAccount" class="btn btn-ghost auth-switch" type="button" hidden>Usar outro e-mail ou chave</button>
+        </form>
+        <button id="authBackProduct" class="btn btn-ghost auth-back" type="button" hidden>Voltar à página do produto</button>
+        <a class="btn btn-lr auth-buy" href="https://pay.cakto.com.br/PLACEHOLDER" target="_blank" rel="noopener noreferrer">Ainda não tem? Adquirir agora</a>
+        <p class="auth-help">Pagou e ainda não recebeu a chave?</p>
+        <button id="authContactOpen" class="btn btn-ghost auth-contact-btn" type="button">Fale conosco</button>
+      </div>
+
+      <div id="authPasswordCard" class="auth-card" hidden>
+        <img class="auth-logo" alt="Contabiliza" src="logo-contabiliza.svg">
+        <h1>Cadastre sua senha</h1>
+        <p class="auth-lead">Ativação confirmada. Crie uma senha para os próximos acessos — assim você não precisa mais da chave de ativação.</p>
+        <form id="passwordForm" class="auth-form" autocomplete="on">
+          <label for="authNewPassword">Nova senha</label>
+          <div class="auth-key-wrap">
+            <input id="authNewPassword" name="newPassword" type="password" required minlength="8" maxlength="128" placeholder="Mínimo 8 caracteres" autocomplete="new-password">
+            <button id="authNewPasswordToggle" class="auth-key-toggle" type="button" aria-label="Mostrar senha" aria-pressed="false">Mostrar</button>
+          </div>
+          <label for="authConfirmPassword">Confirmar senha</label>
+          <input id="authConfirmPassword" name="confirmPassword" type="password" required minlength="8" maxlength="128" placeholder="Repita a senha" autocomplete="new-password">
+          <p class="auth-field-hint">Guarde esta senha. Se esquecer, use “Esqueci minha senha” na tela de login.</p>
+          <div id="passwordError" class="auth-error" hidden></div>
+          <button id="passwordSubmit" class="btn btn-primary auth-submit" type="submit">Salvar senha e entrar</button>
+        </form>
+      </div>
+
+      <div id="authForgotCard" class="auth-card" hidden>
+        <img class="auth-logo" alt="Contabiliza" src="logo-contabiliza.svg">
+        <h1>Redefinir senha</h1>
+        <p class="auth-lead">Informe o e-mail da compra. Se já houver senha cadastrada, enviamos um link para criar uma nova.</p>
+        <form id="forgotForm" class="auth-form" autocomplete="on">
+          <label for="forgotEmail">E-mail</label>
+          <input id="forgotEmail" name="email" type="email" required placeholder="voce@empresa.com" autocomplete="email">
+          <div id="forgotError" class="auth-error" hidden></div>
+          <div id="forgotOk" class="contact-ok" hidden></div>
+          <button id="forgotSubmit" class="btn btn-primary auth-submit" type="submit">Enviar link</button>
+          <button id="forgotBack" class="btn btn-ghost auth-contact-btn" type="button">Voltar ao login</button>
+        </form>
+      </div>
+
+      <div id="authResetCard" class="auth-card" hidden>
+        <img class="auth-logo" alt="Contabiliza" src="logo-contabiliza.svg">
+        <h1>Nova senha</h1>
+        <p class="auth-lead">Defina a nova senha para acessar o simulador com e-mail e senha.</p>
+        <form id="resetForm" class="auth-form" autocomplete="on">
+          <label for="resetPassword">Nova senha</label>
+          <div class="auth-key-wrap">
+            <input id="resetPassword" name="password" type="password" required minlength="8" maxlength="128" placeholder="Mínimo 8 caracteres" autocomplete="new-password">
+            <button id="resetPasswordToggle" class="auth-key-toggle" type="button" aria-label="Mostrar senha" aria-pressed="false">Mostrar</button>
+          </div>
+          <label for="resetConfirmPassword">Confirmar senha</label>
+          <input id="resetConfirmPassword" name="confirmPassword" type="password" required minlength="8" maxlength="128" placeholder="Repita a senha" autocomplete="new-password">
+          <div id="resetError" class="auth-error" hidden></div>
+          <button id="resetSubmit" class="btn btn-primary auth-submit" type="submit">Salvar nova senha</button>
+          <button id="resetBack" class="btn btn-ghost auth-contact-btn" type="button">Voltar ao login</button>
+        </form>
+      </div>
+
+      <div id="authContactCard" class="auth-card" hidden>
+        <img class="auth-logo" alt="Contabiliza" src="logo-contabiliza.svg">
+        <h1>Fale conosco</h1>
+        <p class="auth-lead">Envie sua mensagem para o suporte Contabiliza. Responderemos no e-mail informado.</p>
+        <form id="contactForm" class="auth-form" autocomplete="on">
+          <label for="contactName">Nome</label>
+          <input id="contactName" name="name" type="text" required maxlength="80" placeholder="Seu nome" autocomplete="name">
+          <label for="contactEmail">E-mail</label>
+          <input id="contactEmail" name="email" type="email" required maxlength="120" placeholder="voce@empresa.com" autocomplete="email">
+          <label for="contactSubject">Assunto</label>
+          <select id="contactSubject" name="subject" class="sel" required>
+            <option value="Chave de acesso não recebida">Chave de acesso não recebida</option>
+            <option value="Dúvida sobre o acesso">Dúvida sobre o acesso</option>
+            <option value="Outro assunto">Outro assunto</option>
+          </select>
+          <label for="contactMessage">Mensagem</label>
+          <textarea id="contactMessage" name="message" required minlength="10" maxlength="2000" rows="5" placeholder="Descreva sua solicitação"></textarea>
+          <input id="contactWebsite" name="website" type="text" tabindex="-1" autocomplete="off" class="contact-hp" aria-hidden="true">
+          <div id="contactError" class="auth-error" hidden></div>
+          <div id="contactOk" class="contact-ok" hidden></div>
+          <button id="contactSubmit" class="btn btn-primary auth-submit" type="submit">Enviar mensagem</button>
+          <button id="contactBack" class="btn btn-ghost auth-contact-btn" type="button">Voltar ao login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="appRoot" class="wrap" hidden>
+
+<div class="top no-print">
+    <img class="logo-fc" alt="Contabiliza" src="logo-contabiliza.svg">
+    <div class="auth-bar">
+      <span id="authUserChip" class="auth-chip" hidden></span>
+      <button id="authLogout" class="btn btn-ghost auth-logout" type="button">Sair</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="head no-print">
+      <span class="tag">SIMULADOR TRIBUTÁRIO · SIMPLES NACIONAL X LUCRO PRESUMIDO</span>
+      <h1>Simples Nacional Tradicional, híbrido ou Lucro Presumido?</h1>
+      <p>Compare os três caminhos para o seu cliente do Simples Nacional em cada ano da transição da Reforma Tributária, salve o cenário de cada cliente e gere um relatório com os dados do seu escritório para entregar a ele.</p>
+    </div>
+
+    <div class="body">
+
+      <details class="escritorio no-print">
+        <summary>
+          <span class="cr">▸</span>
+          <span class="pa-txt">
+            <span class="pa-title">Dados do seu escritório (aparecem no relatório)</span>
+            <span class="pa-sub">Preencha uma vez. Fica salvo neste navegador e vira o cabeçalho do relatório em PDF.</span>
+          </span>
+        </summary>
+        <div class="grid" style="margin-top:14px">
+          <div class="field full">
+            <label>Nome do escritório</label>
+            <input id="escNome" type="text" placeholder="Ex.: Contabilidade Silva &amp; Associados" autocomplete="off">
+          </div>
+          <div class="field">
+            <label>Registro profissional <span class="hint">opcional: CRC, OAB ou outro</span></label>
+            <input id="escCrc" type="text" placeholder="Ex.: CRC-SC 012345/O · OAB/SC 12.345" autocomplete="off">
+          </div>
+          <div class="field">
+            <label>Contato <span class="hint">telefone, e-mail ou site</span></label>
+            <input id="escContato" type="text" placeholder="Ex.: (48) 90000-0000 · contato@escritorio.com.br" autocomplete="off">
+          </div>
+          <div class="field full">
+            <label>Sua logo <span class="hint">opcional: aparece no topo do relatório</span></label>
+            <div class="logo-row">
+              <div class="logo-prev" id="escLogoPrev"><span>Sua logo</span></div>
+              <div class="logo-acts">
+                <input type="file" id="escLogoFile" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden>
+                <button class="btn btn-ghost" type="button" id="escLogoBtn">Escolher imagem</button>
+                <button class="btn btn-ghost" type="button" id="escLogoDel" style="display:none">Remover logo</button>
+                <div class="logo-msg" id="escLogoMsg"></div>
+                <div class="logo-size" id="escLogoSizeBox" style="display:none">
+                  <label for="escLogoScale">Tamanho no relatório</label>
+                  <input type="range" id="escLogoScale" min="50" max="180" step="5" value="100">
+                  <span class="val" id="escLogoScaleVal">100%</span>
+                  <button class="btn btn-ghost" type="button" id="escLogoScaleReset">Padrão</button>
+                </div>
+                <div class="help"><b>Tamanho ideal: 600 × 200 px</b> (formato deitado, proporção 3:1) em PNG com fundo transparente. No relatório a logo é exibida com até 190 × 66 px, e o dobro disso garante nitidez na tela e no PDF impresso. Logo quadrada ou em pé também funciona: ela é encaixada inteira, sem cortar. Se ficar pequena ou grande demais, use a barra de <b>tamanho no relatório</b> para ajustar.<br>Aceita PNG, JPG, WEBP e SVG, até 4 MB. A imagem é reduzida e guardada neste navegador junto com os outros dados do escritório, e nada é enviado para a internet. No relatório ela aparece sobre um fundo branco, então logos claras também ficam legíveis.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <div class="intro no-print">
+        <div class="intro-t">Os três caminhos que este simulador compara</div>
+        <ul>
+          <li><b>Guia única:</b> o cliente continua pagando tudo junto no DAS do Simples Nacional, como já é hoje.</li>
+          <li><b>Pagar por fora (híbrido):</b> continua no Simples Nacional, mas paga o IBS e o CBS por fora do DAS. Gera crédito cheio para os clientes empresa.</li>
+          <li><b>Lucro Presumido:</b> sai do Simples Nacional. Paga IBS e CBS cheios (com crédito), mais IRPJ, CSLL e INSS.</li>
+        </ul>
+        <p class="intro-cta">Preencha os números do cliente e compare ano a ano da transição.</p>
+      </div>
+
+      <div class="workspace no-print">
+        <div class="ws-head">Clientes salvos neste navegador</div>
+        <div class="ws-row">
+          <div class="ws-field">
+            <label for="clientName">Cliente (empresa)</label>
+            <input id="clientName" type="text" placeholder="Ex.: Padaria do João LTDA" autocomplete="off">
+          </div>
+          <div class="ws-field">
+            <label for="clientList">Carregar cliente salvo</label>
+            <select id="clientList" class="sel"><option value="">Nenhum salvo</option></select>
+          </div>
+          <button class="btn btn-ghost" id="delClient" type="button">Apagar</button>
+        </div>
+        <div class="ws-bkp">
+          <span class="ws-bkp-t">Cópia de segurança</span>
+          <button class="btn btn-ghost" id="expClients" type="button">↓ Exportar clientes</button>
+          <button class="btn btn-ghost" id="impClients" type="button">↑ Importar clientes</button>
+          <input type="file" id="impFile" accept="application/json,.json" hidden>
+          <span class="ws-bkp-h">Os clientes ficam salvos só neste navegador. Exporte um arquivo para não perder nada ao limpar o histórico, trocar de computador ou usar outro perfil.</span>
+        </div>
+        <div class="ws-msg" id="wsMsg"></div>
+      </div>
+
+      <div class="genbar no-print">
+        <div>
+          <div class="genbar-t">Relatório para o cliente</div>
+          <div class="genbar-s">Gere um PDF com a marca do seu escritório. O <b>resumido</b> traz o diagnóstico e os gráficos; o <b>completo</b> acrescenta o comparativo lado a lado, tudo que foi preenchido e as premissas usadas.</div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-primary" id="reportTop" type="button">Relatório resumido</button>
+          <button class="btn btn-navy" id="reportTopFull" type="button">Relatório completo</button>
+        </div>
+      </div>
+
+      <div class="sect-title no-print">1. Números do cliente</div>
+      <div class="grid no-print">
+        <div class="field full">
+          <label>CNPJ do cliente <span class="hint">opcional: preenche dados automaticamente</span></label>
+          <div class="cnpj-row">
+            <input id="cnpj" type="text" placeholder="00.000.000/0000-00" autocomplete="off" maxlength="18" spellcheck="false">
+            <button class="btn btn-ghost" id="cnpjBtn" type="button">Buscar dados</button>
+          </div>
+          <div class="help" id="cnpjInfo">Digite o CNPJ e clique em Buscar para preencher o nome do cliente e os meses de atividade pela data de abertura (precisa de internet). O campo aceita o formato numérico e o alfanumérico (novas inscrições a partir de 31/07/2026). RBT12 e receitas continuam manuais.</div>
+        </div>
+        <div class="field">
+          <label>RBT12 do mercado interno <span class="hint">define a faixa</span></label>
+          <div class="inp"><span class="pre">R$</span><input id="rbt12" class="has-pre" type="number" value="600000" step="10000" min="0" inputmode="numeric"></div>
+          <div class="help">Receita do mercado interno acumulada nos 12 meses anteriores. Determina a alíquota efetiva das atividades do mercado interno.</div>
+        </div>
+        <div class="field">
+          <label>RBT12 de exportação <span class="hint">mercado externo</span></label>
+          <div class="inp"><span class="pre">R$</span><input id="rbt12Exp" class="has-pre" type="number" value="0" step="10000" min="0" inputmode="numeric"></div>
+          <div class="help">Receita de exportação acumulada nos 12 meses anteriores. Tem <b>faixa própria</b>: o art. 23 da Resolução CGSN 140/2018 manda considerar mercado interno e exportação <b>separadamente</b> para achar a alíquota. Deixe zero se o cliente não exporta.</div>
+        </div>
+        <div class="field">
+          <label>RBA do mercado interno <span class="hint">ano corrente</span></label>
+          <div class="inp"><span class="pre">R$</span><input id="rba" class="has-pre" type="number" value="600000" step="10000" min="0" inputmode="numeric"></div>
+          <div class="help">Usada para o sublimite (R$ 3,6 mi) e o limite (R$ 4,8 mi) do mercado interno.</div>
+        </div>
+        <div class="field">
+          <label>RBA de exportação <span class="hint">ano corrente</span></label>
+          <div class="inp"><span class="pre">R$</span><input id="rbaExp" class="has-pre" type="number" value="0" step="10000" min="0" inputmode="numeric"></div>
+          <div class="help">A exportação tem limite e sublimite <b>próprios</b>, do mesmo valor (art. 2º, § 1º e art. 9º, § 1º da Resolução CGSN 140/2018): quem vende R$ 4 mi dentro e R$ 3 mi fora <b>não</b> estourou nada.</div>
+        </div>
+        <div class="field">
+          <label>Folha dos últimos 12 meses <span class="hint">só empregados · Fator R e INSS</span></label>
+          <div class="inp"><span class="pre">R$</span><input id="folha12" class="has-pre" type="number" value="0" step="1000" min="0" inputmode="numeric"></div>
+          <div class="help">Só os salários dos <b>empregados</b> nos 12 meses (o pró-labore vai no campo ao lado). Entra no Fator R e, no Lucro Presumido, gera o INSS/CPP patronal sobre a folha (~28%).</div>
+        </div>
+        <div class="field">
+          <label>Pró-labore dos últimos 12 meses <span class="hint">INSS do sócio e patronal · Fator R</span></label>
+          <div class="inp"><span class="pre">R$</span><input id="proLabore12" class="has-pre" type="number" value="0" step="1000" min="0" inputmode="numeric"></div>
+          <div class="help">Total do pró-labore dos sócios nos 12 meses. Gera <b>11% de INSS do sócio</b> (GPS, por fora do DAS) nos <b>três regimes</b> e, só no <b>Lucro Presumido</b>, mais <b>20% patronais</b> (no Simples a patronal já está no DAS). Entra no Fator R junto com a folha.</div>
+        </div>
+        <div class="field" style="display:none">
+          <label>Meses de atividade</label>
+          <div class="inp"><input id="mesesAtiv" type="number" value="0" step="1" min="0" max="11"></div>
+        </div>
+      </div>
+
+      <div class="sect-title no-print" style="margin-top:18px">Receita do mês por atividade econômica <span style="color:var(--muted);font-weight:700;text-transform:none;letter-spacing:0"> · agrupada por anexo, com as atividades do PGDAS-D</span></div>
+      <div class="pgdas no-print" id="pgdas"></div>
+      <div class="pg-tot no-print" id="pgdasTot"></div>
+      <div class="help no-print" style="margin:8px 0 0">Clique no anexo para abrir as atividades e informe a receita do mês em cada uma, do mesmo jeito que você preenche no PGDAS-D. O <b>Fator R</b> é calculado pela folha dos 12 meses ÷ RBT12: em ≥ 28% as atividades sujeitas ao fator r vão para o Anexo III; abaixo disso, para o Anexo V. Nas linhas <b>com substituição tributária, tributação monofásica ou antecipação</b>, marque quais tributos já foram recolhidos antes: além do <b>ICMS-ST</b>, o <b>PIS e a COFINS monofásicos</b> (combustíveis, medicamentos, cosméticos, bebidas frias, autopeças e pneus) e o <b>IPI</b> também saem do DAS. As linhas <b>com retenção de ISS</b> tiram o ISS, e as de <b>exportação</b> ficam sem PIS/Cofins, ICMS, ISS e IPI no DAS e sem IBS/CBS na reforma (imunidade, com direito a manter o crédito). Construção civil (7.02 e 7.05) e transporte municipal (16.1) são calculados pelo anexo indicado em cada linha, sem as deduções específicas de material.</div>
+
+      <div class="grid no-print" style="margin-top:16px">
+        <div class="field full">
+          <div class="dasbox" id="dasInfo">-</div>
+        </div>
+        <div class="field full">
+          <label>Quanto das vendas é para empresas que aproveitam o crédito de IBS/CBS?</label>
+          <div class="inp"><input id="b2b" class="has-suf" type="number" value="60" step="5" min="0" max="100"><span class="suf">%</span></div>
+          <div class="help">Em % do faturamento. Conte só as vendas para empresas que usam o crédito de IBS e CBS: <b>Lucro Presumido, Lucro Real ou Simples Nacional no regime híbrido (por fora)</b>. Não conte consumidor final nem empresas do Simples Nacional na guia única, porque esses não aproveitam o crédito.</div>
+        </div>
+        <div class="field full">
+          <label>E quanto das vendas é para cliente que aproveita o crédito de <b>ICMS</b>? <span class="hint">costuma ser menor</span></label>
+          <div class="inp"><input id="b2bIcms" class="has-suf" type="number" value="60" step="5" min="0" max="100"><span class="suf">%</span></div>
+          <div class="help">Também em % do faturamento. <b>Nem todo cliente que credita IBS/CBS credita ICMS.</b> O ICMS só é aproveitado por quem é <b>contribuinte do imposto</b> e vai <b>revender ou industrializar</b> a mercadoria. Quem compra para uso e consumo, prestador de serviço, clínica, escritório e obra não tomam crédito de ICMS. Tomam de IBS/CBS, que é de base ampla. Vale no <b>Lucro Presumido</b> e no ICMS por fora do DAS acima do sublimite; conforme o ICMS vai sendo extinto até 2033, esse campo perde efeito sozinho.</div>
+        </div>
+        <div class="field full">
+          <div class="benbox">
+            <div class="benbox-h">🏷️ Vendas e serviços com benefício de IBS/CBS</div>
+            <div class="benbox-s">
+              Escolha a atividade pelo nome e o desconto da LC 214/2025 vem junto. Informe quanto do
+              faturamento do mês é de cada uma. <b>A redução incide sobre a alíquota, não sobre a base de
+              cálculo:</b> a base continua sendo a receita cheia e o que cai é o percentual aplicado.
+              <b>O benefício vale só fora da guia única</b> (art. 41 da LC 214/2025). É justamente por
+              isso que sair do DAS pode compensar.
+            </div>
+            <div id="benLista"></div>
+            <div class="ben-aviso" id="benAviso" style="display:none"></div>
+            <button class="ben-add" id="benAdd" type="button">+ Adicionar atividade beneficiada</button>
+            <div class="ben-tot"><span>Deixa de pagar IBS/CBS sobre</span><span id="benTot">R$ 0,00</span></div>
+            <div class="ben-nota" id="benNota"></div>
+          </div>
+        </div>
+        <div class="field full">
+          <div class="benbox">
+            <div class="benbox-h">🛒 Compras que geram crédito de IBS/CBS</div>
+            <div class="benbox-s">
+              Informe o <b>valor das compras</b> do mês: o crédito sai da alíquota de IBS/CBS aplicada
+              sobre elas. Compra de fornecedor que destaca IBS/CBS na nota vira crédito e desconta o
+              imposto a pagar. <b>Não inclua compras de MEI, de pessoa física nem de empresa do Simples
+              que esteja na guia única</b>, porque essas não destacam o imposto.
+            </div>
+            <div id="cmpLista"></div>
+            <button class="ben-add" id="cmpAdd" type="button">+ Adicionar compra</button>
+            <div class="cmp-tot"><span>Total de compras no mês</span><span id="cmpTot">R$ 0,00</span></div>
+            <div class="ben-nota" id="cmpNota"></div>
+          </div>
+        </div>
+
+        <div class="field full">
+          <div class="benbox">
+            <div class="benbox-h">🧾 Crédito de ICMS no mês</div>
+            <div class="benbox-s">
+              Aqui você informa <b>o valor do crédito em reais</b>, não a base de compras, porque o ICMS
+              creditado varia com a alíquota de origem, a substituição tributária e o benefício de cada
+              item, então o valor apurado é mais confiável que uma estimativa por percentual. Vale só no
+              <b>Lucro Presumido</b> (e no ICMS por fora do DAS quando a empresa passa do sublimite); na
+              guia única o ICMS já vem repartido na tabela do anexo.
+            </div>
+            <div style="max-width:280px">
+              <div class="inp"><span class="pre">R$</span><input id="credIcms" class="has-pre" type="text" inputmode="decimal" value="0,00"></div>
+            </div>
+            <div class="ben-nota" id="credIcmsNota"></div>
+          </div>
+        </div>
+
+        <div class="field full">
+          <div class="benbox">
+            <div class="benbox-h">🏭 Vendas com benefício de ICMS <span style="font-weight:600;color:var(--muted);font-size:.84rem">Lucro Presumido</span></div>
+            <div class="benbox-s">
+              Saindo do Simples, as vendas passam a ter os benefícios estaduais de ICMS. Informe quanto do
+              faturamento do mês está em cada situação. <b>Isenção, diferimento, suspensão e não incidência
+              zeram o ICMS</b> daquela parcela; na <b>redução da base de cálculo</b> você informa quanto a base
+              é reduzida. Vale no <b>Lucro Presumido</b> e no ICMS por fora do DAS acima do sublimite. Na
+              guia única o ICMS já vem na tabela do anexo.
+            </div>
+            <div id="icmsLista"></div>
+            <button class="ben-add" id="icmsAdd" type="button">+ Adicionar venda com benefício de ICMS</button>
+            <div class="ben-tot"><span>Deixa de pagar ICMS sobre</span><span id="icmsBenTot">R$ 0,00</span></div>
+            <div class="ben-nota" id="icmsBenNota"></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Custo extra por mês para pagar por fora</label>
+          <div class="inp"><span class="pre">R$</span><input id="custo" class="has-pre" type="number" value="300" step="50" min="0" inputmode="numeric"></div>
+          <div class="help">Quanto o cliente gastaria a mais com contador e sistema ao pagar o IBS e o CBS por fora. Só vale para esse caminho.</div>
+        </div>
+      </div>
+
+      <details class="premissas no-print">
+        <summary>
+          <span class="cr">▸</span>
+          <span class="pa-txt">
+            <span class="pa-title">Premissas avançadas: ajuste as alíquotas aqui</span>
+            <span class="pa-sub">Alíquotas do IBS e CBS, crédito, composição do DAS e dados do Lucro Presumido. São estimativas, ajuste por cliente e confirme a base legal.</span>
+          </span>
+        </summary>
+        <div class="grid" style="margin-top:14px">
+          <div class="field">
+            <label>Alíquota do CBS <span class="hint">referência para projeção · editável</span></label>
+            <div class="inp"><input id="cbs" class="has-suf" type="number" value="9.21" step="0.1" min="0"><span class="suf">%</span></div>
+          </div>
+          <div class="field">
+            <label>Alíquota do IBS <span class="hint">referência para projeção · editável</span></label>
+            <div class="inp"><input id="ibs" class="has-suf" type="number" value="18.70" step="0.1" min="0"><span class="suf">%</span></div>
+          </div>
+          <div class="field full">
+            <div class="miniwarn" style="margin-top:0;color:var(--brand-navy);background:var(--soft);border-color:#cdd3f5">
+              <b>Alíquotas estimadas:</b> para fins de projeção, o simulador usa como referência de longo prazo <b>IBS de 18,70%</b> e <b>CBS de 9,21%</b>, totalizando <b>27,91%</b>. São percentuais estimativos e editáveis, podendo mudar conforme a regulamentação e a definição das alíquotas definitivas. Não confundir com a <b>fase de teste</b> (2026: IBS 0,10% + CBS 0,90%; 2027 e 2028 o IBS segue em teste de 0,10% e só cresce a partir de 2029).
+            </div>
+          </div>
+          <div class="field">
+            <label>Presunção IRPJ do comércio <span class="hint">padrão 8%</span></label>
+            <div class="inp"><input id="presIrpjCom" class="has-suf" type="number" value="8" step="1" min="0" max="100"><span class="suf">%</span></div>
+          </div>
+          <div class="field">
+            <label>Presunção CSLL do comércio <span class="hint">padrão 12%</span></label>
+            <div class="inp"><input id="presCsllCom" class="has-suf" type="number" value="12" step="1" min="0" max="100"><span class="suf">%</span></div>
+          </div>
+          <div class="field">
+            <label>Presunção IRPJ do serviço <span class="hint">padrão 32%</span></label>
+            <div class="inp"><input id="presIrpjServ" class="has-suf" type="number" value="32" step="1" min="0" max="100"><span class="suf">%</span></div>
+          </div>
+          <div class="field">
+            <label>Presunção CSLL do serviço <span class="hint">padrão 32%</span></label>
+            <div class="inp"><input id="presCsllServ" class="has-suf" type="number" value="32" step="1" min="0" max="100"><span class="suf">%</span></div>
+          </div>
+          <div class="field">
+            <label>Encargos sobre a folha <span class="hint">só no Lucro Presumido · INSS 20% + RAT + terceiros (~28%)</span></label>
+            <div class="inp"><input id="cpp" class="has-suf" type="number" value="28" step="0.5" min="0" max="100"><span class="suf">%</span></div>
+          </div>
+          <div class="field">
+            <label>INSS do sócio sobre o pró-labore <span class="hint">segurado · vale nos 3 regimes · padrão 11%</span></label>
+            <div class="inp"><input id="inssProSeg" class="has-suf" type="number" value="11" step="0.5" min="0" max="100"><span class="suf">%</span></div>
+          </div>
+          <div class="field">
+            <label>INSS patronal sobre o pró-labore <span class="hint">Lucro Presumido e parte do Anexo IV · padrão 20%</span></label>
+            <div class="inp"><input id="inssProPat" class="has-suf" type="number" value="20" step="0.5" min="0" max="100"><span class="suf">%</span></div>
+          </div>
+          <div class="field">
+            <label>CPP + RAT da folha no Anexo IV <span class="hint">fora do DAS · 20% + RAT, sem terceiros</span></label>
+            <div class="inp"><input id="cppIV" class="has-suf" type="number" value="22" step="0.5" min="0" max="100"><span class="suf">%</span></div>
+          </div>
+          <div class="field full">
+            <div class="miniwarn" style="margin-top:0">
+              <b>Anexo IV:</b> a contribuição previdenciária patronal <b>não está incluída no DAS</b> (LC 123/2006, art. 18, §5º-C). A empresa recolhe por fora a <b>CPP de 20% + RAT</b> sobre a folha dos empregados e <b>20% sobre o pró-labore</b>, mesmo permanecendo no Simples, e por isso esse custo aparece também nas colunas de guia única e por fora. O RAT depende do grau de risco e do FAP (não presuma 2%), e o optante do Simples em regra não recolhe terceiros/Sistema S. Havendo receita de mais de um anexo, o simulador rateia esse custo pela <b>proporção da receita do Anexo IV no mês</b>.
+            </div>
+          </div>
+          <div class="field">
+            <label>Alíquota de ICMS (comércio) <span class="hint">varia por estado, ~18%</span></label>
+            <div class="inp"><input id="icms" class="has-suf" type="number" value="18" step="0.5" min="0" max="40"><span class="suf">%</span></div>
+          </div>
+          <div class="field">
+            <label>Alíquota de ISS (serviço) <span class="hint">geralmente 2% a 5%</span></label>
+            <div class="inp"><input id="iss" class="has-suf" type="number" value="5" step="0.5" min="0" max="10"><span class="suf">%</span></div>
+          </div>
+          <div class="cheia">
+            <div class="cheia-row"><span>Imposto médio do Lucro Presumido no ano selecionado</span><span id="cheia">27,9%</span></div>
+            <div class="cheia-exp" id="cheiaExp"></div>
+          </div>
+        </div>
+      </details>
+
+      <div class="sect-title" style="margin-top:26px">2. Resultado por mês <span id="res_ano_lbl" style="color:var(--muted);font-weight:700"></span></div>
+
+      <div class="yearbox no-print">
+        <label for="ano">Simular o ano de:</label>
+        <select id="ano">
+          <option value="2027">2027</option>
+          <option value="2028">2028</option>
+          <option value="2029">2029</option>
+          <option value="2030">2030</option>
+          <option value="2031">2031</option>
+          <option value="2032">2032</option>
+          <option value="2033">2033 (sistema completo)</option>
+        </select>
+        <span class="year-note" id="yearNote"></span>
+      </div>
+
+      <div class="ctitle"><span class="ci">≡</span><b>Comparativo de carga total</b><span>Guia única (tradicional) x Pagar por fora (híbrido) x Lucro Presumido · valores por mês</span></div>
+      <div class="results">
+        <div class="rescard hero-gu" id="cardGU">
+          <div class="rc-head">
+            <div class="rc-label">Guia única · Simples tradicional <span class="badge" id="badgeGU"></span></div>
+            <div class="rc-value" id="gu_bol">-</div>
+            <div class="rc-sub">Sai do bolso por mês · receita <span id="gu_rec">-</span></div>
+            <div class="rc-badges" id="gu_badges"></div>
+          </div>
+          <div class="rc-body" id="gu_rows"></div>
+          <div class="rc-foot">
+            <div class="fline tot"><span class="fl">Total por mês</span><span class="fv" id="gu_tot">-</span></div>
+            <div class="fline cred"><span class="fl">Crédito ao cliente PJ</span><span class="fv" id="gu_cre">-</span></div>
+            <details class="calc"><summary>Ver o cálculo</summary><div class="calc-body" id="gu_calc"></div></details>
+          </div>
+        </div>
+        <div class="rescard hero-pf" id="cardPF">
+          <div class="rc-head">
+            <div class="rc-label">Pagar por fora · regime híbrido <span class="badge" id="badgePF"></span></div>
+            <div class="rc-value" id="pf_bol">-</div>
+            <div class="rc-sub">Sai do bolso por mês · receita <span id="pf_rec">-</span></div>
+            <div class="rc-badges" id="pf_badges"></div>
+          </div>
+          <div class="rc-body" id="pf_rows"></div>
+          <div class="rc-foot">
+            <div class="fline tot"><span class="fl">Total por mês</span><span class="fv" id="pf_tot">-</span></div>
+            <div class="fline cred"><span class="fl">Crédito ao cliente PJ</span><span class="fv" id="pf_cre">-</span></div>
+            <details class="calc"><summary>Ver o cálculo</summary><div class="calc-body" id="pf_calc"></div></details>
+          </div>
+        </div>
+        <div class="rescard hero-lp" id="cardLP">
+          <div class="rc-head">
+            <div class="rc-label">Lucro Presumido <span class="badge" id="badgeLP"></span></div>
+            <div class="rc-value" id="lp_bol">-</div>
+            <div class="rc-sub">Sai do bolso por mês · receita <span id="lp_rec">-</span></div>
+            <div class="rc-badges" id="lp_badges"></div>
+          </div>
+          <div class="rc-body" id="lp_rows"></div>
+          <div class="rc-foot">
+            <div class="fline tot"><span class="fl">Total por mês</span><span class="fv" id="lp_tot">-</span></div>
+            <div class="fline cred"><span class="fl">Crédito ao cliente PJ</span><span class="fv" id="lp_cre">-</span></div>
+            <div class="miniwarn" id="lp_folha" style="display:none"></div>
+            <details class="calc"><summary>Ver o cálculo</summary><div class="calc-body" id="lp_calc"></div></details>
+          </div>
+        </div>
+      </div>
+
+      <div class="compare">
+        <div class="cbox">
+          <div class="k">Diferença de custo (por fora x guia única)</div>
+          <div class="val" id="cmp_custo">-</div>
+          <small>Quanto pagar por fora custa a mais (ou a menos) que a guia única, por mês.</small>
+        </div>
+        <div class="cbox">
+          <div class="k">Crédito extra para os clientes</div>
+          <div class="val" id="cmp_cred">-</div>
+          <small>Quanto de crédito a mais o cliente passa ao pagar por fora. Ajuda a vender mais para empresas.</small>
+        </div>
+      </div>
+
+      <div class="rec" id="rec">
+        <div class="rk">Recomendação orientativa</div>
+        <div class="rt" id="rec_txt">-</div>
+      </div>
+
+      <div class="note no-print">
+        <span class="nh">Como a transição funciona (2027 a 2033)</span>
+        O <b>CBS</b> entra cheio já em 2027. O <b>IBS</b> entra aos poucos: fica em 0,1% em 2027 e 2028, depois vai a 10%, 20%, 30% e 40% da alíquota cheia (de 2029 a 2032) e chega cheio em 2033. O <b>ICMS e o ISS</b> reduzem 10% ao ano (90%, 80%, 70% e 60% de 2029 a 2032) e são extintos em 2033. No regime <b>por fora</b>, a parte de ICMS/ISS que ainda fica no DAS acompanha essa redução e some em 2033, restando só a parte federal. Percentuais conforme a LC 214/2025; a aplicação exata ao Simples Nacional ainda está em regulamentação, então ajuste as premissas por cliente.
+      </div>
+
+
+
+      <div class="genbar no-print" style="margin-top:24px">
+        <div>
+          <div class="genbar-t">Salvar cliente e gerar relatório</div>
+          <div class="genbar-s">Salve este cenário no navegador e gere o PDF com a marca do seu escritório para entregar ao cliente.</div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-ghost" id="saveClientBottom" type="button" style="background:#fff">Salvar cliente</button>
+          <button class="btn btn-primary" id="reportBottom" type="button">Relatório resumido</button>
+          <button class="btn btn-navy" id="reportBottomFull" type="button">Relatório completo</button>
+        </div>
+      </div>
+
+      <div class="actions no-print">
+        <button class="btn btn-primary" id="clearAll" type="button">Limpar para novo cliente</button>
+        <button class="btn btn-ghost" id="reset" type="button">Restaurar exemplo</button>
+      </div>
+
+      <div class="disc">
+        <b>Sobre o crédito das compras:</b> este simulador considera que a situação apresentada dá direito a 100% de crédito sobre os insumos adquiridos. Verifique se há produtos com benefício fiscal de IBS/CBS, porque cada benefício reduz o crédito. Nesse caso, ajuste o campo de compras de fornecedores.
+      </div>
+
+      <div class="disc">
+        <b>Aviso:</b> simulação com valores estimados. Os percentuais do IBS, do CBS e do crédito ainda podem mudar e dependem de regras em definição. A conta do Lucro Presumido é uma estimativa e varia conforme a atividade e a folha (não inclui todos os detalhes, como o adicional de IRPJ). Ferramenta de apoio à decisão; não substitui a análise técnica do responsável. Base legal: EC 132/2023 e LC 214/2025.
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">Contabiliza · Simples Nacional x Lucro Presumido · Foque no negócio. A gente ajuda no fiscal.</div>
+
+  <div id="reportBar">
+    <button class="btn btn-primary" id="rp_print" type="button">Imprimir / Salvar PDF</button>
+    <button class="btn btn-ghost" id="rp_back" type="button" style="background:#fff">Voltar ao simulador</button>
+  </div>
+  <div id="report">
+    <div class="rp-head">
+      <div class="rp-headtop">
+        <div class="rp-headtxt">
+          <span class="rp-badge">DIAGNÓSTICO · REFORMA TRIBUTÁRIA</span>
+          <div class="rp-esc" id="rp_esc">Seu Escritório de Contabilidade</div>
+          <div class="rp-sub" id="rp_sub"></div>
+        </div>
+        <div class="rp-logo" id="rp_logo"></div>
+      </div>
+      <div class="rp-meta">
+        <span><b>Cliente:</b> <span id="rp_cliente">-</span></span>
+        <span><b>Atividade:</b> <span id="rp_atv">-</span></span>
+        <span><b>Ano analisado:</b> <span id="rp_ano">-</span></span>
+        <span><b>Data:</b> <span id="rp_data">-</span></span>
+      </div>
+    </div>
+    <div class="rp-kpis">
+      <div class="kpi kpi-best">
+        <div class="kpi-l">Opção mais econômica</div>
+        <div class="kpi-v" id="rp_best">-</div>
+        <div class="kpi-s" id="rp_bests">-</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-l">Economia por mês</div>
+        <div class="kpi-v" id="rp_ecoM">-</div>
+        <div class="kpi-s">ante o caminho mais caro</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-l">Economia por ano</div>
+        <div class="kpi-v" id="rp_ecoA">-</div>
+        <div class="kpi-s">projeção de 12 meses</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-l">Crédito ao cliente</div>
+        <div class="kpi-v" id="rp_cred">-</div>
+        <div class="kpi-s">gerado no caminho recomendado</div>
+      </div>
+    </div>
+    <div class="rp-grid2">
+      <div class="rp-panel">
+        <div class="rp-ph">Quanto sai do bolso por mês · <span id="rp_ano2"></span></div>
+        <div id="rp_bars"></div>
+      </div>
+      <div class="rp-panel">
+        <div class="rp-ph">Diagnóstico e orientação</div>
+        <div class="rp-diag" id="rp_diag"></div>
+      </div>
+    </div>
+    <div class="rp-panel">
+      <div class="rp-ph">Composição por tributo · <span id="rp_ano3"></span></div>
+      <table class="rp-break" id="rp_break"></table>
+      <div class="rp-breaknote">Quanto de cada tributo compõe o valor mensal em cada caminho. Na transição, ICMS e ISS migram para o IBS e a soma de cada coluna é o total do mês.</div>
+    </div>
+    <div class="rp-panel">
+      <div class="rp-ph">Trajetória na transição (2027 a 2033) · quanto sai do bolso por mês</div>
+      <div id="rp_line"></div>
+      <div class="rp-legend">
+        <span><i style="background:#8a93a6"></i>Guia única</span>
+        <span><i style="background:#5c0a0a"></i>Pagar por fora</span>
+        <span><i style="background:#21867a"></i>Lucro Presumido</span>
+      </div>
+    </div>
+    <!-- só no relatório completo -->
+    <div id="rp_extra"></div>
+    <div class="rp-foot" id="rp_foot"></div>
+  </div>
+</div>
+
+<script src="auth-gate.js"></script>
+<script src="motor.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
