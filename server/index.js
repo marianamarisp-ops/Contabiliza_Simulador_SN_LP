@@ -336,7 +336,9 @@ app.listen(PORT, () => {
   console.log(`Webhook Cakto: POST http://localhost:${PORT}/webhook/cakto`);
   console.log(`Admin: http://localhost:${PORT}/admin.html`);
   if (!process.env.CAKTO_WEBHOOK_SECRET) console.warn('AVISO: CAKTO_WEBHOOK_SECRET não definido');
-  if (!process.env.ADMIN_TOKEN) console.warn('AVISO: ADMIN_TOKEN não definido');
+  if (!process.env.ADMIN_EMAIL || !process.env.ADMIN_PASSWORD) {
+    console.warn('AVISO: ADMIN_EMAIL / ADMIN_PASSWORD não definidos');
+  }
   if (!process.env.SESSION_SECRET) console.warn('AVISO: SESSION_SECRET não definido');
   hydrateLicensesRemote()
     .then((result) => {

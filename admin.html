@@ -15,11 +15,15 @@
   <div class="admin-card">
     <img class="auth-logo" alt="Contabiliza" src="logo-contabiliza.svg">
     <h1>Painel de acessos</h1>
-    <p class="admin-muted">Use o mesmo <b>ADMIN_TOKEN</b> do arquivo <code>.env</code>. Aqui você libera clientes manualmente, copia chaves e reenvia e-mail.</p>
+    <p class="admin-muted">Entre com o e-mail e a senha admin do <code>.env</code>. Aqui você libera clientes manualmente, copia chaves e reenvia e-mail.</p>
     <div class="admin-row">
-      <div class="field" style="flex:1.4">
-        <label for="adminToken">Token admin</label>
-        <input id="adminToken" type="password" placeholder="Cole o ADMIN_TOKEN" autocomplete="off">
+      <div class="field" style="flex:1.2">
+        <label for="adminEmail">E-mail admin</label>
+        <input id="adminEmail" type="email" placeholder="admin@seudominio.com" autocomplete="username">
+      </div>
+      <div class="field" style="flex:1">
+        <label for="adminPassword">Senha admin</label>
+        <input id="adminPassword" type="password" placeholder="Senha" autocomplete="current-password">
       </div>
       <button class="btn btn-primary" id="btnLoad" type="button">Carregar licenças</button>
     </div>
@@ -28,7 +32,7 @@
 
   <div class="admin-card">
     <h2>Liberar acesso manual</h2>
-    <p class="admin-muted">Preencha o e-mail da compra e clique em <b>Gerar chave</b>. A chave aparece na tabela abaixo.</p>
+    <p class="admin-muted">Preencha o e-mail da compra e clique em <b>Gerar chave</b>. A chave aparece na tabela abaixo. O cliente deve entrar em <code>http://localhost:3001</code> (este simulador SN × LP), não no Simulador LR da porta 3000.</p>
     <div class="admin-row">
       <div class="field">
         <label for="newEmail">E-mail do cliente</label>
@@ -57,7 +61,7 @@
           </tr>
         </thead>
         <tbody id="licenseRows">
-          <tr><td colspan="5">Carregue com o token admin.</td></tr>
+          <tr><td colspan="5">Carregue com o e-mail e a senha admin.</td></tr>
         </tbody>
       </table>
     </div>
@@ -66,10 +70,12 @@
 
 <script>
 (function () {
-  var TOKEN_KEY = 'contabiliza_admin_token';
+  var CREDS_KEY = 'contabiliza_admin_creds';
 
   function $(id) { return document.getElementById(id); }
-  function token() { return ($('adminToken').value || '').trim(); }
+  function email() { return ($('adminEmail').value || '').trim(); }
+  function password() { return ($('adminPassword').value || ''); }
+  function hasCreds() { return Boolean(email() && password()); }
   function msg(text, ok) {
     ['adminMsg', 'createMsg'].forEach(function (id) {
       var el = $(id);
@@ -95,7 +101,16 @@
       .finally(function () { clearTimeout(timer); });
   }
   function headers() {
-    return { 'Content-Type': 'application/json', 'x-admin-token': token() };
+    return {
+      'Content-Type': 'application/json',
+      'x-admin-email': email(),
+      'x-admin-password': password()
+    };
+  }
+  function saveCreds() {
+    try {
+      localStorage.setItem(CREDS_KEY, JSON.stringify({ email: email(), password: password() }));
+    } catch (e) {}
   }
 
   function esc(s) {
@@ -116,7 +131,7 @@
         : '<span class="admin-status off">' + esc(l.status) + '</span>';
       return '<tr>' +
         '<td><b>' + esc(l.email) + '</b><br><span style="color:#707070">' + esc(l.name) + '</span>' +
-          (l.hasPassword ? '<br><span style="color:#1f6b57;font-size:.72rem">senha cadastrada</span>' : '<br><span style="color:#8a6a00;font-size:.72rem">aguarda 1º login</span>') +
+          (l.hasPassword ? '<br><span style="color:#8f8614;font-size:.72rem">senha cadastrada</span>' : '<br><span style="color:#8a6a00;font-size:.72rem">aguarda 1º login</span>') +
         '</td>' +
         '<td><code>' + esc(l.accessKey) + '</code></td>' +
         '<td>' + st + '</td>' +
@@ -132,8 +147,8 @@
   }
 
   function load() {
-    if (!token()) { msg('Informe o token admin.', false); return; }
-    try { localStorage.setItem(TOKEN_KEY, token()); } catch (e) {}
+    if (!hasCreds()) { msg('Informe e-mail e senha admin.', false); return; }
+    saveCreds();
     api('/api/admin/licenses', { headers: headers() })
       .then(function (d) {
         if (!d.ok) { msg(d.error || 'Falha ao carregar', false); return; }
@@ -156,7 +171,7 @@
 
   $('btnLoad').addEventListener('click', load);
   $('btnCreate').addEventListener('click', function () {
-    if (!token()) { msg('Informe o token admin.', false); return; }
+    if (!hasCreds()) { msg('Informe e-mail e senha admin.', false); return; }
     var email = ($('newEmail').value || '').trim();
     if (!email) { msg('Informe o e-mail do cliente.', false); return; }
     var done = busy($('btnCreate'), 'Gerando...');
@@ -214,8 +229,9 @@
   });
 
   try {
-    var saved = localStorage.getItem(TOKEN_KEY);
-    if (saved) $('adminToken').value = saved;
+    var saved = JSON.parse(localStorage.getItem(CREDS_KEY) || 'null');
+    if (saved && saved.email) $('adminEmail').value = saved.email;
+    if (saved && saved.password) $('adminPassword').value = saved.password;
   } catch (e) {}
 })();
 </script>

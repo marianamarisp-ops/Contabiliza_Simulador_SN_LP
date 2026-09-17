@@ -233,9 +233,35 @@ function revokeByEmail(email, reason) {
   return license;
 }
 
+function normalizeAccessKey(value) {
+  return String(value || '')
+    .trim()
+    .toUpperCase()
+    .replace(/[\u200B-\u200D\uFEFF]/g, '')
+    .replace(/\s+/g, '');
+}
+
+function rotateAccessKey(email) {
+  const store = readStore();
+  const license = store.licenses.find((l) => l.email === normalizeEmail(email));
+  if (!license) return null;
+  license.accessKey = generateAccessKey();
+  license.passwordHash = null;
+  license.passwordSetAt = null;
+  license.resetTokenHash = null;
+  license.resetTokenExpiresAt = null;
+  license.emailSentAt = null;
+  license.status = 'active';
+  license.revokedAt = null;
+  license.revokeReason = null;
+  license.updatedAt = new Date().toISOString();
+  writeStore(store);
+  return license;
+}
+
 function authenticate(email, credential) {
   const license = findByEmail(email);
-  if (!license) return { ok: false, error: 'E-mail ou credencial inválidos.' };
+  if (!license) return { ok: false, error: 'E-mail ou chave inválidos.' };
   if (license.status !== 'active') {
     return { ok: false, error: 'Acesso revogado ou inativo. Se acabou de pagar, aguarde alguns minutos ou fale com o suporte.' };
   }
@@ -243,7 +269,7 @@ function authenticate(email, credential) {
   const cred = String(credential || '').trim();
   if (!cred) return { ok: false, error: 'Informe a chave de acesso ou a senha.' };
 
-  const keyMatch = cred.toUpperCase() === String(license.accessKey || '').toUpperCase();
+  const keyMatch = normalizeAccessKey(cred) === normalizeAccessKey(license.accessKey);
   const passMatch = hasPassword(license) && verifyPassword(cred, license.passwordHash);
 
   if (!hasPassword(license)) {
@@ -370,7 +396,7 @@ function listLicenses() {
 }
 
 function createManualLicense({ email, name }) {
-  return grantLicense({
+  const { license, created } = grantLicense({
     email,
     name: name || '',
     orderId: 'manual-' + crypto.randomUUID(),
@@ -378,6 +404,9 @@ function createManualLicense({ email, name }) {
     productName: 'Liberação manual',
     phone: ''
   });
+  // Admin "Gerar chave" sempre emite chave nova (e reinicia o 1º acesso).
+  const rotated = rotateAccessKey(license.email);
+  return { license: rotated || license, created, reused: false };
 }
 
 module.exports = {
@@ -394,6 +423,7 @@ module.exports = {
   MIN_PASSWORD_LEN,
   listLicenses,
   createManualLicense,
+  rotateAccessKey,
   findByEmail,
   findByOrderId,
   markEmailSent,

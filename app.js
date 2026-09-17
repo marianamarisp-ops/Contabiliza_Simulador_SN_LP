@@ -1307,11 +1307,11 @@
     var s='<svg class="chart" viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI,Arial,sans-serif">';
     s+='<line x1="6" y1="'+base+'" x2="'+(W-6)+'" y2="'+base+'" stroke="#e2e5f0"/>';
     items.forEach(function(d,i){
-      var x=gap+i*(bw+gap), h=Math.max(3,d.val/max*maxH), y=base-h, c=d.best?'#12855f':'#5c0a0a';
+      var x=gap+i*(bw+gap), h=Math.max(3,d.val/max*maxH), y=base-h, c=d.best?'#b8ae1a':'#5c0a0a';
       s+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw+'" height="'+h.toFixed(1)+'" rx="7" fill="'+c+'"/>';
       s+='<text x="'+(x+bw/2).toFixed(1)+'" y="'+(y-9).toFixed(1)+'" text-anchor="middle" font-size="15" font-weight="700" fill="#16182c">'+money(d.val)+'</text>';
       s+='<text x="'+(x+bw/2).toFixed(1)+'" y="'+(base+20)+'" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3a3f52">'+d.label+'</text>';
-      if(d.best) s+='<text x="'+(x+bw/2).toFixed(1)+'" y="'+(base+37)+'" text-anchor="middle" font-size="11" font-weight="800" fill="#12855f">Mais econômica</text>';
+      if(d.best) s+='<text x="'+(x+bw/2).toFixed(1)+'" y="'+(base+37)+'" text-anchor="middle" font-size="11" font-weight="800" fill="#b8ae1a">Mais econômica</text>';
     });
     return s+'</svg>';
   }

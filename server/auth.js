@@ -86,15 +86,24 @@ function requireAuth(req, res, next) {
   next();
 }
 
+function safeEqualStr(a, b) {
+  const ha = crypto.createHash('sha256').update(String(a || '')).digest();
+  const hb = crypto.createHash('sha256').update(String(b || '')).digest();
+  return crypto.timingSafeEqual(ha, hb);
+}
+
 function requireAdmin(req, res, next) {
-  const admin = process.env.ADMIN_TOKEN;
-  if (!admin) {
-    return res.status(500).json({ ok: false, error: 'ADMIN_TOKEN não configurado.' });
+  const expectedEmail = process.env.ADMIN_EMAIL;
+  const expectedPassword = process.env.ADMIN_PASSWORD;
+  if (!expectedEmail || !expectedPassword) {
+    return res.status(500).json({ ok: false, error: 'Credenciais admin não configuradas.' });
   }
-  const header = req.headers['x-admin-token'] || '';
-  const q = req.query.token || '';
-  if (header !== admin && q !== admin) {
-    return res.status(401).json({ ok: false, error: 'Token admin inválido.' });
+  const email = String(req.headers['x-admin-email'] || req.body && req.body.adminEmail || '').trim().toLowerCase();
+  const password = String(req.headers['x-admin-password'] || req.body && req.body.adminPassword || '');
+  const emailOk = safeEqualStr(email, String(expectedEmail).trim().toLowerCase());
+  const passwordOk = safeEqualStr(password, expectedPassword);
+  if (!emailOk || !passwordOk) {
+    return res.status(401).json({ ok: false, error: 'E-mail ou senha admin inválidos.' });
   }
   next();
 }
