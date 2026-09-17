@@ -49,6 +49,22 @@
     try { localStorage.removeItem(CREDS_KEY); } catch (e) {}
   }
 
+  function applyCheckoutUrl(url) {
+    if (!url) return;
+    document.querySelectorAll('a.product-buy, a.auth-buy').forEach(function (a) {
+      a.href = url;
+    });
+  }
+
+  function loadPublicConfig() {
+    return fetch('/api/public-config')
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data && data.checkoutUrl) applyCheckoutUrl(data.checkoutUrl);
+      })
+      .catch(function () {});
+  }
+
   function api(path, options) {
     options = options || {};
     var headers = options.headers || {};
@@ -555,6 +571,8 @@
         });
       });
     }
+
+    loadPublicConfig();
 
     // Migra credenciais antigas (que guardavam a chave) para o novo formato
     try {

@@ -27,6 +27,11 @@ function mailProvider() {
   return 'none';
 }
 
+function publicAppUrl() {
+  const raw = process.env.PUBLIC_APP_URL || process.env.RENDER_EXTERNAL_URL || 'http://localhost:3000';
+  return String(raw).replace(/\/$/, '');
+}
+
 function smtpPass() {
   return String(process.env.SMTP_PASS || '').replace(/^["']|["']$/g, '');
 }
@@ -141,7 +146,7 @@ async function sendMail({ to, subject, text, html, replyTo }) {
 }
 
 async function sendAccessEmail({ to, name, accessKey }) {
-  const appUrl = process.env.PUBLIC_APP_URL || 'http://localhost:3000';
+  const appUrl = publicAppUrl();
   const subject = 'Seu acesso ao Simulador Contabiliza';
   const text =
     `Olá${name ? ' ' + name : ''},\n\n` +
@@ -175,7 +180,7 @@ async function sendAccessEmail({ to, name, accessKey }) {
 }
 
 async function sendPasswordResetEmail({ to, name, resetToken }) {
-  const appUrl = (process.env.PUBLIC_APP_URL || 'http://localhost:3000').replace(/\/$/, '');
+  const appUrl = publicAppUrl();
   const resetUrl = `${appUrl}/?resetToken=${encodeURIComponent(resetToken)}`;
   const subject = 'Redefinir senha — Simulador Contabiliza';
   const text =
@@ -207,7 +212,7 @@ async function sendPasswordResetEmail({ to, name, resetToken }) {
 }
 
 async function sendNoPasswordHintEmail({ to, name }) {
-  const appUrl = process.env.PUBLIC_APP_URL || 'http://localhost:3000';
+  const appUrl = publicAppUrl();
   const subject = 'Acesso ao Simulador Contabiliza';
   const text =
     `Olá${name ? ' ' + name : ''},\n\n` +
@@ -288,6 +293,7 @@ module.exports = {
   mailConfigured,
   mailProvider,
   webhookConfigured,
+  publicAppUrl,
   postToRelay,
   sendAccessEmail,
   sendPasswordResetEmail,

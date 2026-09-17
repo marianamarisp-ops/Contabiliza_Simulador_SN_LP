@@ -7,7 +7,7 @@ const express = require('express');
 const { authenticate, listLicenses, createManualLicense, revokeByEmail, hydrateLicensesRemote, markEmailSent, setPasswordForLicense, createPasswordReset, resetPasswordWithToken, findByEmail, hasPassword } = require('./licenses');
 const { createSessionToken, createSetupToken, requireAuth, requireAdmin, verifySessionToken, verifySetupToken } = require('./auth');
 const { handleCaktoWebhook } = require('./webhook');
-const { sendAccessEmail, sendContactEmail, sendPasswordResetEmail, sendNoPasswordHintEmail, smtpConfigured, mailConfigured, mailProvider } = require('./email');
+const { sendAccessEmail, sendContactEmail, sendPasswordResetEmail, sendNoPasswordHintEmail, smtpConfigured, mailConfigured, mailProvider, publicAppUrl } = require('./email');
 
 const CONTACT_WINDOW_MS = 10 * 60 * 1000;
 const CONTACT_MAX = 3;
@@ -54,7 +54,9 @@ function isValidEmail(value) {
 const app = express();
 const ROOT = path.join(__dirname, '..');
 const PORT = Number(process.env.PORT || 3000);
+const HOST = process.env.HOST || '0.0.0.0';
 
+app.set('trust proxy', 1);
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -64,7 +66,15 @@ app.get('/api/health', (_req, res) => {
     smtp: smtpConfigured(),
     email: mailConfigured(),
     emailProvider: mailProvider(),
-    publicUrl: process.env.PUBLIC_APP_URL || null
+    publicUrl: publicAppUrl()
+  });
+});
+
+app.get('/api/public-config', (_req, res) => {
+  res.json({
+    ok: true,
+    publicUrl: publicAppUrl(),
+    checkoutUrl: process.env.CAKTO_CHECKOUT_URL || ''
   });
 });
 
@@ -331,10 +341,11 @@ app.use(express.static(ROOT, {
   }
 }));
 
-app.listen(PORT, () => {
-  console.log(`Contabiliza SN x LP rodando em http://localhost:${PORT}`);
-  console.log(`Webhook Cakto: POST http://localhost:${PORT}/webhook/cakto`);
-  console.log(`Admin: http://localhost:${PORT}/admin.html`);
+app.listen(PORT, HOST, () => {
+  const url = publicAppUrl();
+  console.log(`Contabiliza SN x LP em ${url} (${HOST}:${PORT})`);
+  console.log(`Webhook Cakto: POST ${url}/webhook/cakto`);
+  console.log(`Admin: ${url}/admin.html`);
   if (!process.env.CAKTO_WEBHOOK_SECRET) console.warn('AVISO: CAKTO_WEBHOOK_SECRET não definido');
   if (!process.env.ADMIN_EMAIL || !process.env.ADMIN_PASSWORD) {
     console.warn('AVISO: ADMIN_EMAIL / ADMIN_PASSWORD não definidos');

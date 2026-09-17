@@ -32,7 +32,7 @@
 
   <div class="admin-card">
     <h2>Liberar acesso manual</h2>
-    <p class="admin-muted">Preencha o e-mail da compra e clique em <b>Gerar chave</b>. A chave aparece na tabela abaixo. O cliente deve entrar em <code>http://localhost:3001</code> (este simulador SN × LP), não no Simulador LR da porta 3000.</p>
+    <p class="admin-muted">Preencha o e-mail da compra e clique em <b>Gerar chave</b>. A chave aparece na tabela abaixo. O cliente entra neste simulador SN × LP (<span id="adminAppUrl">esta mesma URL</span>), não no Simulador LR.</p>
     <div class="admin-row">
       <div class="field">
         <label for="newEmail">E-mail do cliente</label>
@@ -233,6 +233,10 @@
     if (saved && saved.email) $('adminEmail').value = saved.email;
     if (saved && saved.password) $('adminPassword').value = saved.password;
   } catch (e) {}
+
+  fetch('/api/public-config').then(parseJson).then(function (d) {
+    if (d && d.publicUrl && $('adminAppUrl')) $('adminAppUrl').textContent = d.publicUrl;
+  }).catch(function () {});
 })();
 </script>
 </body>

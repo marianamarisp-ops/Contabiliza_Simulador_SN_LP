@@ -1,0 +1,33 @@
+# Blueprint do Render: dashboard.render.com → New → Blueprint
+# Plano free: o serviço dorme sem tráfego e o webhook da Cakto pode falhar no cold start.
+# Para produção com pagamentos, suba para Starter (always-on).
+services:
+  - type: web
+    name: contabiliza-sn-lp
+    runtime: node
+    plan: free
+    region: ohio
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "20"
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: CAKTO_WEBHOOK_SECRET
+        sync: false
+      - key: CAKTO_CHECKOUT_URL
+        sync: false
+      - key: EMAIL_WEBHOOK_URL
+        sync: false
+      - key: EMAIL_WEBHOOK_SECRET
+        sync: false
+      - key: CONTACT_EMAIL
+        sync: false
